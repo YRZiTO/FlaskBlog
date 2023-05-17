@@ -12,6 +12,7 @@ class User(db.Model):
     password = db.Column(db.String(60), nullable = False)
     posts = db.relationship("Post", backref= "author", lazy = True)
 
+
     # Create a method to print out the user's information
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
@@ -24,6 +25,7 @@ class Post(db.Model):
     date_posted = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     content = db.Column(db.Text, nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
+
 
     # Create a method to print out the post's information
     def __repr__(self):

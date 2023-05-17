@@ -3,6 +3,7 @@ from app.forms import RegistrationForm, LoginForm
 from app.models import User, Post
 from app import app
 
+
 # Create a list of dictionaries to represent the posts
 posts = [
     {
@@ -18,11 +19,15 @@ posts = [
         "date_posted": "May 5, 2023"
     },
 ]
+
+
 # Create a route for the home page
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template("home.html", posts=posts)
+
+
 # Create a route for the about page
 @app.route("/about")
 def about():
@@ -37,6 +42,7 @@ def register():
         flash(f"Account created for {form.username.data}!", "success")
         return redirect(url_for("home"))
     return render_template("register.html", title="Register", form=form)
+
 
 # Create a route for the login page
 @app.route("/login", methods=["GET","POST"])
