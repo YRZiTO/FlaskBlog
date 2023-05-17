@@ -1,20 +1,7 @@
-import os
-from flask import Flask, render_template, url_for, flash, redirect
-from flask_sqlalchemy import SQLAlchemy
-from forms import RegistrationForm, LoginForm
-from models import User, Post
-
-
-# Set the base directory
-basedir = os.path.abspath(os.path.dirname(__file__))
-# Create an instance of the Flask class
-app = Flask(__name__)
-# Set the secret key to protect against modifying cookies and cross-site request forgery attacks
-app.config['SECRET_KEY'] = 'a968985285e687c30db75e72fb479c19'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'site.db')
-db = SQLAlchemy(app)
-
-
+from flask import render_template, url_for, flash, redirect
+from app.forms import RegistrationForm, LoginForm
+from app.models import User, Post
+from app import app
 
 # Create a list of dictionaries to represent the posts
 posts = [
@@ -64,6 +51,3 @@ def login():
     return render_template("login.html", title="Login", form=form)
 
 
-# Run the app
-if __name__ == "__main__":
-    app.run(debug=True)
