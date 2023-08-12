@@ -43,7 +43,6 @@ class UpdateAccountForm(FlaskForm):  # Inherit from FlaskForm
             if user:
                 raise ValidationError(
                     "That username is already taken! Please choose a different one.")
-
     def validate_email(self, email):
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
