@@ -40,6 +40,7 @@ def about():
 # Create a route for the registration page
 @app.route("/register", methods=["GET","POST"])
 def register():
+    """Register a new user and add them to the database if the form is valid and the user doesn't already exist in the database"""
     if current_user.is_authenticated:
         return redirect(url_for("home"))
     form = RegistrationForm()
@@ -59,6 +60,7 @@ def register():
 # Create a route for the login page
 @app.route("/login", methods=["GET","POST"])
 def login():
+    """Login a user if the form is valid and the user exists in the database and redirect them to the home page if they are already logged in"""
     if current_user.is_authenticated:
         return redirect(url_for("home"))
     form = LoginForm()
@@ -77,10 +79,12 @@ def login():
 # Create a route for the logout
 @app.route("/logout")
 def logout():
+    """Logout a user and redirect them to the home page"""
     logout_user()
     return redirect(url_for("home"))
 
 def save_picture(form_picture):
+    """Save the picture to the static/profile_images folder and return the picture filename"""
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_filename = random_hex + f_ext
@@ -95,6 +99,7 @@ def save_picture(form_picture):
 @app.route("/account", methods=["GET", "POST"])
 @login_required
 def account():
+    """Update the account information if the form is valid and redirect the user to the account page if they are already logged in"""
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:

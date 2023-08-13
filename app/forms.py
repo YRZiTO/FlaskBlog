@@ -15,10 +15,12 @@ class RegistrationForm(FlaskForm): # Inherit from FlaskForm
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
+        """Check if the username is already taken"""
         user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError("That username is already taken! Please choose a different one.")
     def validate_email(self, email):
+        """Check if the email is already taken"""
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError("That email address is already registered!")
@@ -38,12 +40,14 @@ class UpdateAccountForm(FlaskForm):  # Inherit from FlaskForm
     submit = SubmitField('Update')
 
     def validate_username(self, username):
+        """Check if the username is already taken"""
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
             if user:
                 raise ValidationError(
                     "That username is already taken! Please choose a different one.")
     def validate_email(self, email):
+        """Check if the email is already taken"""
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
             if user:
