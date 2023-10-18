@@ -1,6 +1,7 @@
 from datetime import datetime
-from app import db, login_manager
+from app import db, login_manager, app
 from flask_login import UserMixin
+from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -15,6 +16,27 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable = False, default = "default.jpg")
     password = db.Column(db.String(60), nullable = False)
     posts = db.relationship("Post", backref= "author", lazy = True)
+
+
+    # Create a method to generate a token
+    def get_reset_token(self):
+        """Generate a token for the user to reset their password with a 30 minute expiration time"""
+        s = Serializer(app.secret_key)
+        return s.dumps({"user_id": self.id})
+
+
+    # Create a static method to verify the token
+    @staticmethod
+    def verify_reset_token(token):
+        """Verify the token to make sure it is valid and not expired before returning the user id"""
+        s = Serializer(app.secret_key)
+        try:
+            user_id = s.loads(token, max_age=1800)["user_id"]
+            # print(user_id)
+        except:
+            return None
+        return User.query.get(user_id)
+
 
     # Create a method to print out the user's information
     def __repr__(self):
