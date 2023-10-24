@@ -72,8 +72,8 @@
 </div>
 <div class="border-top pt-3">
     <small class="text-light">
-        <!-- url_for('login') is a Jinja2 function that generates the URL for the login view function based on its name. -->
-        Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+        <!-- url_for('users.login') is a Jinja2 function that generates the URL for the login view function based on its name. -->
+        Already have an account? <a class="ml-2" href="{{ url_for('users.login') }}">Sign In</a>
     </small>
 </div>
 {% endblock content %}

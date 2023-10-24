@@ -42,7 +42,7 @@
     <div class="d-flex align-items-center">
         {{ form.submit(class="btn btn-dark") }}
         <small class="text-muted ml-2">
-            <a href="{{ url_for('reset_request') }}">Forgot Password?</a>
+            <a href="{{ url_for('users.reset_request') }}">Forgot Password?</a>
         </small>
     </div>
 </div>
@@ -51,7 +51,7 @@
 <div class="border-top pt-3">
     <small class="text-light">
         <!-- Url_for is a function that takes the name of the function as an argument and returns the url for that function. -->
-        Need an account? <a class="ml-2" href="{{ url_for('register') }}">Register now!</a>
+        Need an account? <a class="ml-2" href="{{ url_for('users.register') }}">Register now!</a>
     </small>
 </div>
 {% endblock content %}

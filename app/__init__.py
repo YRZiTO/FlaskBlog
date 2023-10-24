@@ -1,29 +1,35 @@
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from app.config import Config
 
-# Set the base directory
-basedir = os.path.abspath(os.path.dirname(__file__))
-# Create an instance of the Flask class
-app = Flask(__name__)
-# Set the secret key to protect against modifying cookies and cross-site request forgery attacks
-app.config['SECRET_KEY'] = 'a968985285e687c30db75e72fb479c19'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'site.db')
 # Create an instance of the SQLAlchemy class
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 # Create an instance of the Bcrypt class
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
-login_manager.login_view = "login" # We pass the function name of the route
+bcrypt = Bcrypt()
+login_manager = LoginManager()
+login_manager.login_view = "users.login" # We pass the function name of the route
 login_manager.login_message_category = "info"
-app.config["MAIL_SERVER"] = "smtp.googlemail.com"
-app.config["MAIL_PORT"] = 587
-app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USERNAME"] = os.environ.get("EMAIL_USER")
-app.config["MAIL_PASSWORD"] = os.environ.get("EMAIL_PASS")
-mail = Mail(app)
+mail = Mail()
 
-from app import routes
+
+def create_app(config_class=Config):
+    # Create an instance of the Flask class
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
+
+    from app.main.routes import main
+    from app.posts.routes import posts
+    from app.users.routes import users
+    app.register_blueprint(users)
+    app.register_blueprint(posts)
+    app.register_blueprint(main)
+
+    return app

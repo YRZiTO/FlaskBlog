@@ -1,5 +1,6 @@
 from datetime import datetime
-from app import db, login_manager, app
+from flask import current_app
+from app import db, login_manager
 from flask_login import UserMixin
 from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 
@@ -21,7 +22,7 @@ class User(db.Model, UserMixin):
     # Create a method to generate a token
     def get_reset_token(self):
         """Generate a token for the user to reset their password with a 30 minute expiration time"""
-        s = Serializer(app.secret_key)
+        s = Serializer(current_app.secret_key)
         return s.dumps({"user_id": self.id})
 
 
@@ -29,7 +30,7 @@ class User(db.Model, UserMixin):
     @staticmethod
     def verify_reset_token(token):
         """Verify the token to make sure it is valid and not expired before returning the user id"""
-        s = Serializer(app.secret_key)
+        s = Serializer(current_app.secret_key)
         try:
             user_id = s.loads(token, max_age=1800)["user_id"]
             # print(user_id)
