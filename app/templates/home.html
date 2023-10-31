@@ -10,7 +10,9 @@
                     <small class="text-muted">{{ post.date_posted.strftime("%A, %B %e, %Y at %I:%M %p") }}</small>
                 </div>
                 <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
-                <p class="article-content">{{ post.content }}</p>
+                <!-- <p class="article-content">{{ post.content }}</p> -->
+                <!-- Display truncated content with "Read more" link -->
+                <p class="article-content">{{ post.content[:300] }}{% if post.content|length > 300 %} <a href="{{ url_for('posts.post', post_id=post.id) }}">Read more</a>{% endif %}</p>
             </div>
         </article>
     {% endfor %}

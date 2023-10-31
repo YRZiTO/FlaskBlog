@@ -92,6 +92,10 @@ def user_posts(username):
     posts = Post.query.filter_by(author=user)\
         .order_by(Post.date_posted.desc())\
         .paginate(page=page, per_page=5)
+    # Truncate the post content to a certain length (e.g., 300 characters)
+    for post in posts.items:
+        if len(post.content) > 300:
+            post.content = f'{post.content[:300]}...'
     return render_template("user_posts.html", posts=posts, user=user)
 
 
