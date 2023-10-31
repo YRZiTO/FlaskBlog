@@ -1,6 +1,6 @@
 # # Full-Feature Flask Blog
 
-Developed a feature-rich web blog application using Flask and Python, leveraging various technologies and libraries to ensure a robust and interactive user experience. The project is designed with a fully modular architecture for easy maintainability.
+Feature-rich web blog application using Flask and Python, leveraging various technologies and libraries to ensure a robust and interactive user experience. The project is designed with a fully modular architecture for easy maintainability.
 
 ## Technologies
 
