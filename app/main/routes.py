@@ -10,12 +10,11 @@ main = Blueprint("main", __name__)
 @main.route("/home")
 def home():
     page = request.args.get("page", 1, type=int)
-    posts = Post.query.order_by(
-        Post.date_posted.desc()).paginate(page=page, per_page=5)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
     # Truncate the post content to a certain length (e.g., 300 characters)
     for post in posts.items:
         if len(post.content) > 300:
-            post.content = f'{post.content[:300]}...'
+            post.content = f"{post.content[:300]}..."
     return render_template("home.html", posts=posts)
 
 

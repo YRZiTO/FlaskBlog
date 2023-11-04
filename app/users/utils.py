@@ -12,7 +12,8 @@ def save_picture(form_picture):
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_filename = random_hex + f_ext
     picture_path = os.path.join(
-        current_app.root_path, "static/profile_images", picture_filename)
+        current_app.root_path, "static/profile_images", picture_filename
+    )
     output_size = (125, 125)
     img = Image.open(form_picture)
     img.thumbnail(output_size)
@@ -23,8 +24,11 @@ def save_picture(form_picture):
 # Create a function to send a reset email
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message("Password Reset Request",
-                  sender="noreply@yousifzito.com", recipients=[user.email])
+    msg = Message(
+        "Password Reset Request",
+        sender="noreply@yousifzito.com",
+        recipients=[user.email],
+    )
     msg.body = f"""To reset your password, visit the following link: {url_for("users.reset_token", token=token, _external=True)}
 
 If you did not make this request then simply ignore this email and no changes will be made.

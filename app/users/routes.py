@@ -2,7 +2,13 @@ from flask import Blueprint, render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Post
-from app.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from app.users.forms import (
+    RegistrationForm,
+    LoginForm,
+    UpdateAccountForm,
+    RequestResetForm,
+    ResetPasswordForm,
+)
 from app.users.utils import save_picture, send_reset_email
 
 
@@ -19,12 +25,14 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         # Hash the password
-        hashed_password = bcrypt.generate_password_hash(
-            form.password.data).decode("utf-8")
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
+            "utf-8"
+        )
         # Create a new user
         # user = User(username=form.username.data.lower(), email=form.email.data.lower(), password=hashed_password)
-        user = User(username=form.username.data,
-                    email=form.email.data, password=hashed_password)
+        user = User(
+            username=form.username.data, email=form.email.data, password=hashed_password
+        )
         db.session.add(user)  # Add the user to the database
         db.session.commit()  # Commit the changes to the database
         flash("Your account has been created! You are now able to login.", "success")
@@ -79,9 +87,10 @@ def account():
     elif request.method == "GET":
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = url_for(
-        "static", filename="profile_images/" + current_user.image_file)
-    return render_template("account.html", title="Account", image_file=image_file, form=form)
+    image_file = url_for("static", filename="profile_images/" + current_user.image_file)
+    return render_template(
+        "account.html", title="Account", image_file=image_file, form=form
+    )
 
 
 # Create a route for the user's posts
@@ -89,13 +98,15 @@ def account():
 def user_posts(username):
     page = request.args.get("page", 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
-    posts = Post.query.filter_by(author=user)\
-        .order_by(Post.date_posted.desc())\
+    posts = (
+        Post.query.filter_by(author=user)
+        .order_by(Post.date_posted.desc())
         .paginate(page=page, per_page=5)
+    )
     # Truncate the post content to a certain length (e.g., 300 characters)
     for post in posts.items:
         if len(post.content) > 300:
-            post.content = f'{post.content[:300]}...'
+            post.content = f"{post.content[:300]}..."
     return render_template("user_posts.html", posts=posts, user=user)
 
 
@@ -108,9 +119,12 @@ def reset_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
-        flash("An email has been sent with instructions to reset your password.", "info")
+        flash(
+            "An email has been sent with instructions to reset your password.", "info"
+        )
         return redirect(url_for("users.login"))
     return render_template("reset_request.html", title="Reset Password", form=form)
+
 
 # Create a route for the reset password token
 
@@ -126,8 +140,9 @@ def reset_token(token):
     form = ResetPasswordForm()
     if form.validate_on_submit():
         # Hash the password
-        hashed_password = bcrypt.generate_password_hash(
-            form.password.data).decode("utf-8")
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
+            "utf-8"
+        )
         user.password = hashed_password
         db.session.commit()  # Commit the changes to the database
         flash("Your password has been updated! You are now able to login.", "success")

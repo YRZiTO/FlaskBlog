@@ -10,7 +10,7 @@ db = SQLAlchemy()
 # Create an instance of the Bcrypt class
 bcrypt = Bcrypt()
 login_manager = LoginManager()
-login_manager.login_view = "users.login" # We pass the function name of the route
+login_manager.login_view = "users.login"  # We pass the function name of the route
 login_manager.login_message_category = "info"
 mail = Mail()
 
@@ -29,6 +29,7 @@ def create_app(config_class=Config):
     from app.posts.routes import posts
     from app.users.routes import users
     from app.errors.handlers import errors
+
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
