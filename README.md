@@ -258,6 +258,7 @@ FlaskBlog/
 │   └── templates/             # Jinja2 templates
 ├── instance/                  # Application database
 ├── requirements.txt           # Python dependencies
+├── LICENSE                    # LICENSE File
 └── run.py                     # Application entry point
 ```
 
