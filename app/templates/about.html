@@ -1,6 +1,109 @@
 {% extends "about_layout.html" %}
 {% block content %}
-<article class="media content-section">
-    <h1>About</h1>
-    </article>
+<div class="content-section">
+    <div class="media mb-4">
+        <img class="rounded-circle account-img mr-3"
+            src="{{ url_for('static', filename='profile_images/default.jpg') }}">
+        <div class="media-body">
+            <h1 class="account-heading">About Yousif's Blog</h1>
+            <p class="text-muted-custom">A Feature-Rich Flask Blog Platform</p>
+        </div>
+    </div>
+
+    <div class="row welcome-section">
+        <div class="col-md-12">
+            <h3>Welcome to My Blog!</h3>
+            <p>This is a full-featured web blog application built with Flask and Python. I created this platform to
+                share thoughts, ideas, and connect with others who share similar interests.</p>
+            <p>Feel free to explore the site, create an account, and start sharing your own posts!</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    Core Features
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>User registration and authentication</li>
+                        <li>Profile management with custom avatars</li>
+                        <li>Create, read, update, and delete blog posts</li>
+                        <li>Pagination for efficient browsing</li>
+                        <li>Responsive design for all devices</li>
+                        <li>Password recovery via email</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    Technologies Used
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Python & Flask framework</li>
+                        <li>SQLAlchemy for database management</li>
+                        <li>Flask-Bcrypt for secure password hashing</li>
+                        <li>Jinja2 Templates for dynamic content</li>
+                        <li>Bootstrap for responsive design</li>
+                        <li>WTForms for form validation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    Coming Soon
+                </div>
+                <div class="card-body">
+                    <p>I'm constantly working to improve this blog platform. Here are some features I'm planning to add:
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Comments system for posts</li>
+                                <li>Post categories and tags</li>
+                                <li>User roles and permissions</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Enhanced search functionality</li>
+                                <li>Social media integration</li>
+                                <li>Rich text editor for posts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="connect-section">
+                CONNECT WITH ME
+            </div>
+            <div class="text-center mt-4">
+                <p>Have questions or suggestions? Feel free to <a href="https://yousifzito.com" class="get-in-touch"
+                        target="_blank">get in touch</a>!</p>
+                <div class="mt-3">
+                    <a href="mailto:yousifzito@gmail.com" class="btn btn-social"><i class="fas fa-envelope mr-2"></i>
+                        Email</a>
+                    <a href="https://github.com/yrzito" class="btn btn-social" target="_blank"><i
+                            class="fab fa-github mr-2"></i> GitHub</a>
+                    <a href="https://linkedin.com/in/yousifzito" class="btn btn-social" target="_blank"><i
+                            class="fab fa-linkedin mr-2"></i> LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
