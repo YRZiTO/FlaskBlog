@@ -257,8 +257,9 @@ FlaskBlog/
 │   ├── static/                # Static files (CSS, JS, etc.)
 │   └── templates/             # Jinja2 templates
 ├── instance/                  # Application database
+├── README.md                  # Project documentation and setup instructions
 ├── requirements.txt           # Python dependencies
-├── LICENSE                    # LICENSE File
+├── LICENSE                    # MIT License file
 └── run.py                     # Application entry point
 ```
 
