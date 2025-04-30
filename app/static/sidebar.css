@@ -1,0 +1,111 @@
+/* Sidebar Styling */
+.content-section {
+    background: #ffffff;
+    padding: 15px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content-section h3 {
+    color: #343a40;
+    border-bottom: 2px solid #1f2937;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.sidebar-heading {
+    color: #495057;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    border-left: 3px solid #1f2937;
+    padding-left: 10px;
+}
+
+.sidebar-section {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.sidebar-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Search box styling */
+.search-form {
+    margin-bottom: 10px;
+}
+
+/* Latest posts styling */
+.sidebar-posts {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.sidebar-post {
+    padding: 8px 12px;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-post:hover {
+    background-color: #f8f9fa;
+}
+
+.sidebar-post a {
+    color: #1f2937;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sidebar-post a:hover {
+    color: #0056b3;
+}
+
+.sidebar-post small {
+    font-size: 0.75rem;
+}
+
+/* Calendar styling */
+.calendar-container {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.month-year-header {
+    font-weight: 600;
+    color: #343a40;
+}
+
+.calendar-table {
+    width: 100%;
+    font-size: 0.8rem;
+}
+
+.calendar-table th {
+    text-align: center;
+    padding: 5px;
+    color: #6c757d;
+}
+
+.calendar-table td {
+    text-align: center;
+    padding: 5px;
+    width: 14.28%;
+}
+
+.current-day {
+    background-color: #1f2937;
+    color: white;
+    border-radius: 50%;
+}
+
+/* Badge styling */
+.badge-primary {
+    background-color: #1f2937;
+}
